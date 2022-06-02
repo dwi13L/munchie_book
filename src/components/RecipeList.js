@@ -5,10 +5,13 @@ export default function RecipeList({ recipies }) {
   return (
     <div className="recipe-container">
       {recipies.map((recipe) => (
-        <div className="recipe" key={recipe.id}>
+        <div key={recipe.id}>
           <Recipe {...recipe} />
         </div>
       ))}
+      <div className="add-recipe-container">
+        <button className="btn btn-primary">Add Recipe</button>
+      </div>
     </div>
   );
 }

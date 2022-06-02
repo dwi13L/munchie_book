@@ -1,0 +1,21 @@
+@import-normalize;
+@import url('https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css');
+@import 'fonts.css';
+@import 'recipe-list.css';
+@import 'header.css';
+/* @import 'button.css'; */
+
+
+ *,*::before,*::after{
+    box-sizing: border-box;
+    font-family: Gotham Rounded, sans-serif;
+}
+
+/* html{ */
+    /* font-size: 20px; */
+/* } */
+
+body{
+    padding: 0;
+    margin: 0;
+}
