@@ -1,7 +1,8 @@
 import React from "react";
 import Recipe from "./Recipe";
 
-export default function RecipeList({ recipies }) {
+export default function RecipeList(props) {
+  const { recipies } = props;
   return (
     <div className="recipe-container">
       {recipies.map((recipe) => (

@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RecipeList from "./RecipeList";
 import "../css/app.css";
 import Header from "./Header";
+import { v4 as uuid } from "uuid";
 
 function App() {
+  const [recipies, setRecipies] = useState(sampleRecipies);
+
   return (
     <>
       {/* <Header /> */}
@@ -17,7 +20,7 @@ function App() {
  */
 const sampleRecipies = [
   {
-    id: 1,
+    id: uuid(),
     name: `Pizza`,
     servings: 2,
     cooktime: `60`,
@@ -39,7 +42,7 @@ const sampleRecipies = [
     ],
   },
   {
-    id: 2,
+    id: uuid(),
     name: `Fruit salad`,
     servings: 4,
     cooktime: `10`,
@@ -56,7 +59,7 @@ const sampleRecipies = [
     ],
   },
   {
-    id: 3,
+    id: uuid(),
     name: `Coffee`,
     servings: 1,
     cooktime: `3`,
