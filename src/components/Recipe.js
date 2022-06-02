@@ -1,15 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RecipeContext } from "./App";
 import Ingredient from "./Ingredient";
 
 export default function Recipe(props) {
   const { id, name, cooktime, servings, instructions, ingredients } = props;
+  const { deleteRecipeHandler } = useContext(RecipeContext);
   return (
     <div className="card main">
       <div className="card-header flex">
         <h3>{name}</h3>
         <div className="button-container">
           <button className="btn btn-primary ">Edit</button>
-          <button className="btn btn-danger">Delete</button>
+          <button
+            className="btn btn-danger"
+            onClickCapture={() => {
+              deleteRecipeHandler(id);
+            }}
+          >
+            Delete
+          </button>
         </div>
       </div>
       <article className="card-body">
