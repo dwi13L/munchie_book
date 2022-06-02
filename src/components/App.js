@@ -16,14 +16,10 @@ function App() {
   const handlers = { addRecipeHandler, deleteRecipeHandler };
 
   useEffect(() => {
-    console.log(`WRITING TO STORAGE`);
-    console.log(`BEFORE`, recipies);
     localStorage.setItem(RECIPIES, JSON.stringify(recipies));
-    console.log(`AFTER`, recipies);
   }, [recipies]);
 
   function addRecipeHandler() {
-    console.log(`add recipie invoked`);
     const newRecipe = {
       id: uuid(),
       name: `Another recipe`,
