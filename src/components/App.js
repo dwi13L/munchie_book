@@ -1,16 +1,60 @@
-import React, { useEffect, useState } from "react";
+import React, { useDeferredValue, useEffect, useState } from "react";
 import RecipeList from "./RecipeList";
 import "../css/app.css";
 import Header from "./Header";
 import { v4 as uuid } from "uuid";
 
+export const RecipeContext = React.createContext(undefined);
+const RECIPIES = `COOKWITHREACT_RECIPIES`;
+
 function App() {
-  const [recipies, setRecipies] = useState(sampleRecipies);
+  const [recipies, setRecipies] = useState(() => {
+    const data = localStorage.getItem(RECIPIES);
+    return data == null ? [] : JSON.parse(data);
+  });
+
+  const handlers = { addRecipeHandler, deleteRecipeHandler };
+
+  useEffect(() => {
+    console.log(`WRITING TO STORAGE`);
+    console.log(`BEFORE`, recipies);
+    localStorage.setItem(RECIPIES, JSON.stringify(recipies));
+    console.log(`AFTER`, recipies);
+  }, [recipies]);
+
+  function addRecipeHandler() {
+    console.log(`add recipie invoked`);
+    const newRecipe = {
+      id: uuid(),
+      name: `Another recipe`,
+      servings: 4,
+      cooktime: `50`,
+      instructions: [`Step 1`, `Step 2`, `Step 3`],
+      ingredients: [
+        {
+          name: `Item 1`,
+          quantity: `1 kg`,
+        },
+        {
+          name: `Item 2`,
+          quantity: `250 grams`,
+        },
+      ],
+    };
+
+    setRecipies([...recipies, newRecipe]);
+  }
+
+  function deleteRecipeHandler(id) {
+    setRecipies(recipies.filter((recipe) => recipe.id !== id));
+  }
 
   return (
     <>
       {/* <Header /> */}
-      <RecipeList recipies={sampleRecipies} />
+      <RecipeContext.Provider value={handlers}>
+        <RecipeList recipies={recipies} />
+      </RecipeContext.Provider>
     </>
   );
 }
