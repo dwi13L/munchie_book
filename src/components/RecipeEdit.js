@@ -49,6 +49,7 @@ export default function RecipeEdit() {
           buttonTitle={`Add Step`}
           label={`Steps`}
         />
+        <button className="save btn">Save</button>
       </div>
 
       {/* 
