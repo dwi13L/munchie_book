@@ -1,0 +1,19 @@
+.recipe-ingredient-edit_1{
+    display: flex;
+    justify-content: space-around;
+    align-items: baseline;
+}
+
+.recipe-ingredient-edit_1 input{
+    width: 47%;
+    margin: 5px 0px;
+}
+
+.recipe-ingredient-edit_1 button{
+    font-size: small;
+}
+
+.recipe-ingredient-edit_2 input{
+    width: 90%;
+    margin: 5px 0px;
+}

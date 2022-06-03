@@ -1,0 +1,9 @@
+.labels{
+    display: flex;
+    justify-content: space-around;
+    margin-right: 20px;
+}
+
+.btn.btn-primary.add{
+    margin-top: 10px;
+}

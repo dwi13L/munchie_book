@@ -3,6 +3,7 @@ import RecipeList from "./RecipeList";
 import "../css/app.css";
 import Header from "./Header";
 import { v4 as uuid } from "uuid";
+import RecipeEdit from "./RecipeEdit";
 
 export const RecipeContext = React.createContext(undefined);
 const RECIPIES = `COOKWITHREACT_RECIPIES`;
@@ -50,6 +51,7 @@ function App() {
       {/* <Header /> */}
       <RecipeContext.Provider value={handlers}>
         <RecipeList recipies={recipies} />
+        <RecipeEdit />
       </RecipeContext.Provider>
     </>
   );
