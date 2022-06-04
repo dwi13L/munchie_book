@@ -1,10 +1,7 @@
 import React from "react";
-import {
-  RecipeIngredientEdit_t1,
-  RecipeIngredientEdit_t2,
-} from "RecipeIngredientEdit";
+import { InstructionEditor, IngredientEditor } from "./RecipeComponentEditor";
 
-function RecipeEditContainer_t2(props) {
+function IngredientEditorContainer(props) {
   const {
     title,
     buttonTitle,
@@ -25,7 +22,7 @@ function RecipeEditContainer_t2(props) {
             <span className="card-text">{label2}</span>
           </div>
           {ingredients.map((ingredient, index) => (
-            <RecipeIngredientEdit_t2
+            <IngredientEditor
               ingredient={ingredient}
               index={index}
               key={index}
@@ -40,7 +37,7 @@ function RecipeEditContainer_t2(props) {
   );
 }
 
-function RecipeEditContainer_t1(props) {
+function InstructionEditorContainer(props) {
   const { title, buttonTitle, label, instructions, addInstructionHandler } =
     props;
   return (
@@ -52,7 +49,7 @@ function RecipeEditContainer_t1(props) {
             <span className="card-text">{label}</span>
           </div>
           {instructions.map((instruction, index) => (
-            <RecipeIngredientEdit_t1
+            <InstructionEditor
               instruction={instruction}
               index={index}
               key={index}
@@ -70,4 +67,4 @@ function RecipeEditContainer_t1(props) {
   );
 }
 
-export { RecipeEditContainer_t1, RecipeEditContainer_t2 };
+export { InstructionEditorContainer, IngredientEditorContainer };

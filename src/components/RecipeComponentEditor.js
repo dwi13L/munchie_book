@@ -1,10 +1,10 @@
-import { RecipeEditor } from "./RecipeEdit";
+import { RecipeEditorContext } from "./RecipeEditor";
 import React, { useContext } from "react";
 
-function RecipeIngredientEdit_t2(props) {
+function IngredientEditor(props) {
   const { ingredient, index } = props;
   const { ingredientUpdateHandler, deleteIngredientHandler } =
-    useContext(RecipeEditor);
+    useContext(RecipeEditorContext);
   /**  Sample data
        {
          id: `xyz`,
@@ -36,7 +36,7 @@ function RecipeIngredientEdit_t2(props) {
   );
 }
 
-function RecipeIngredientEdit_t1(props) {
+function InstructionEditor(props) {
   const { instruction, index } = props;
   /** Sample data
     
@@ -48,7 +48,7 @@ function RecipeIngredientEdit_t1(props) {
       ],
    */
   const { instructionUpdateHandler, deleteInstructionHandler } =
-    useContext(RecipeEditor);
+    useContext(RecipeEditorContext);
 
   return (
     <>
@@ -66,4 +66,4 @@ function RecipeIngredientEdit_t1(props) {
   );
 }
 
-export { RecipeIngredientEdit_t1, RecipeIngredientEdit_t2 };
+export { InstructionEditor, IngredientEditor };

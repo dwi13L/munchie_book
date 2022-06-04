@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import { RecipeContext } from "./App";
+import { RecipeCrudContext } from "./App";
 import Recipe from "./Recipe";
 
 export default function RecipeList(props) {
   const { recipies } = props;
-  const { addRecipeHandler } = useContext(RecipeContext);
+  const { addRecipeHandler } = useContext(RecipeCrudContext);
   return (
     <div className="recipe-container">
       {recipies.map((recipe) => (
