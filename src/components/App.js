@@ -131,7 +131,7 @@ function App() {
 const sampleRecipies = [
   {
     id: "1",
-    name: `Pizza`,
+    name: `Pizza - (SAMPLE RECIPE)`,
     servings: 2,
     cooktime: `60`,
     instructions: [
@@ -153,7 +153,7 @@ const sampleRecipies = [
   },
   {
     id: "2",
-    name: `Fruit salad`,
+    name: `Fruit salad (SAMPLE RECIPE)`,
     servings: 4,
     cooktime: `10`,
     instructions: [
@@ -170,7 +170,7 @@ const sampleRecipies = [
   },
   {
     id: "3",
-    name: `Coffee`,
+    name: `Coffee (SAMPLE RECIPE)`,
     servings: 1,
     cooktime: `3`,
     instructions: [
