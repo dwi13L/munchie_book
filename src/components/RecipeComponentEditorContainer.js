@@ -28,7 +28,10 @@ function IngredientEditorContainer(props) {
             />
           ))}
         </div>
-        <button className="btn btn-primary add" onClick={addIngredientHandler}>
+        <button
+          className="btn btn-primary add btn-sm"
+          onClick={addIngredientHandler}
+        >
           {buttonTitle}
         </button>
       </div>
@@ -56,7 +59,7 @@ function InstructionEditorContainer(props) {
           ))}
         </div>
         <button
-          className="btn btn-primary add"
+          className="btn btn-primary add btn-sm"
           onClickCapture={addInstructionHandler}
         >
           {buttonTitle}

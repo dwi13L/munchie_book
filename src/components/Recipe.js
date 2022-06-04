@@ -12,13 +12,13 @@ export default function Recipe(props) {
         <h3>{name}</h3>
         <div className="button-container">
           <button
-            className="btn btn-primary"
+            className="btn btn-primary btn-sm"
             onClick={() => editRecipeHandler(id)}
           >
             Edit
           </button>
           <button
-            className="btn btn-danger"
+            className="btn btn-danger btn-sm"
             onClick={() => {
               deleteRecipeHandler(id);
             }}

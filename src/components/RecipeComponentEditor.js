@@ -29,7 +29,10 @@ function IngredientEditor(props) {
         value={ingredient.quantity}
         onChange={(e) => updateAgent({ quantity: e.target.value })}
       />
-      <button className="btn" onClick={() => deleteIngredientHandler(index)}>
+      <button
+        className="btn btn-sm"
+        onClick={() => deleteIngredientHandler(index)}
+      >
         &times;
       </button>
     </div>
@@ -58,7 +61,10 @@ function InstructionEditor(props) {
           value={instruction}
           onChange={(e) => instructionUpdateHandler(index, e.target.value)}
         />
-        <button className="btn" onClick={() => deleteInstructionHandler(index)}>
+        <button
+          className="btn btn-sm"
+          onClick={() => deleteInstructionHandler(index)}
+        >
           &times;
         </button>
       </div>
