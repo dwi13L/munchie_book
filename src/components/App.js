@@ -50,18 +50,19 @@ function App() {
   function addRecipeHandler() {
     const newRecipe = {
       id: uuid(),
-      name: `Another recipe`,
-      servings: 4,
-      cooktime: `50`,
-      instructions: [`Step 1`, `Step 2`, `Step 3`],
+      name: `Maggi (Sample Recipe)`,
+      servings: 2,
+      cooktime: `5`,
+      instructions: [
+        `Boil water`,
+        `Add taste maker and stir`,
+        `Add Maggi noodles`,
+        `Cook for 2 minutes and serve hot`,
+      ],
       ingredients: [
         {
-          name: `Item 1`,
-          quantity: `1 kg`,
-        },
-        {
-          name: `Item 2`,
-          quantity: `250 grams`,
+          name: `Maggi noodles`,
+          quantity: `200g`,
         },
       ],
     };
