@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
-import { RecipeContext } from "./App";
+import { RecipeCrudContext } from "./App";
 import {
-  RecipeEditContainer_t1,
-  RecipeEditContainer_t2,
-} from "./RecipeEditContainer2";
+  InstructionEditorContainer,
+  IngredientEditorContainer,
+} from "./RecipeComponentEditorContainer";
 // import TextField from "@mui/material/TextField";
 // import Box from "@mui/material/Box";
 
-export const RecipeEditor = React.createContext(null);
+export const RecipeEditorContext = React.createContext(null);
 
-export default function RecipeEdit({ closeEditorHandler, recipe }) {
+export default function RecipeEditor({ closeEditorHandler, recipe }) {
   /**
    * Props
    */
@@ -18,7 +18,7 @@ export default function RecipeEdit({ closeEditorHandler, recipe }) {
   /**
    * Hooks
    */
-  const { updateRecipeHandler } = useContext(RecipeContext);
+  const { updateRecipeHandler } = useContext(RecipeCrudContext);
 
   function updateAgent(changes) {
     updateRecipeHandler(recipe.id, { ...recipe, ...changes });
@@ -127,8 +127,8 @@ export default function RecipeEdit({ closeEditorHandler, recipe }) {
           </section>
         </div>
         <br />
-        <RecipeEditor.Provider value={handlers}>
-          <RecipeEditContainer_t2
+        <RecipeEditorContext.Provider value={handlers}>
+          <IngredientEditorContainer
             title={`Ingredients`}
             buttonTitle={`Add Ingredient`}
             label1={`Name`}
@@ -137,14 +137,14 @@ export default function RecipeEdit({ closeEditorHandler, recipe }) {
             addIngredientHandler={addIngredientHandler}
           />
           <br />
-          <RecipeEditContainer_t1
+          <InstructionEditorContainer
             title={`Instructions`}
             buttonTitle={`Add Step`}
             label={`Steps`}
             instructions={instructions}
             addInstructionHandler={addInstructionHandler}
           />
-        </RecipeEditor.Provider>
+        </RecipeEditorContext.Provider>
         {/* <button className="save btn">Save</button> */}
       </div>
 

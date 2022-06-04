@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
-import { RecipeContext } from "./App";
+import { RecipeCrudContext } from "./App";
 import Ingredient from "./Ingredient";
 
 export default function Recipe(props) {
   const { id, name, cooktime, servings, instructions, ingredients } = props;
-  const { deleteRecipeHandler, editRecipeHandler } = useContext(RecipeContext);
+  const { deleteRecipeHandler, editRecipeHandler } =
+    useContext(RecipeCrudContext);
   return (
     <div className="card main">
       <div className="card-header flex">

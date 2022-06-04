@@ -1,12 +1,12 @@
-import React, { useDeferredValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import RecipeList from "./RecipeList";
 import "../css/app.css";
 import Header from "./Header";
 import { v4 as uuid } from "uuid";
-import RecipeEdit from "./RecipeEdit";
+import RecipeEditor from "./RecipeEditor";
 import EditorSegmentMessage from "./EditorSegmentMessage";
 
-export const RecipeContext = React.createContext(undefined);
+export const RecipeCrudContext = React.createContext(undefined);
 const RECIPIES = `COOKWITHREACT_RECIPIES`;
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
    */
   const [recipies, setRecipies] = useState(() => {
     const data = localStorage.getItem(RECIPIES);
-    return data == null || JSON.parse(data).length == 0
+    return data == null || JSON.parse(data).length === 0
       ? sampleRecipies
       : // ? []
         JSON.parse(data);
@@ -97,7 +97,7 @@ function App() {
   return (
     <>
       <Header />
-      <RecipeContext.Provider value={handlers}>
+      <RecipeCrudContext.Provider value={handlers}>
         {/* Left Side */}
         {!recipeListEmpty && <RecipeList recipies={recipies} />}
         {recipeListEmpty && (
@@ -111,7 +111,7 @@ function App() {
         {/* Right Side */}
 
         {editorOpen && (
-          <RecipeEdit
+          <RecipeEditor
             recipe={selectedRecipe}
             closeEditorHandler={closeEditorHandler}
           />
@@ -120,7 +120,7 @@ function App() {
         {!editorOpen && (
           <EditorSegmentMessage recipeListEmpty={recipeListEmpty} />
         )}
-      </RecipeContext.Provider>
+      </RecipeCrudContext.Provider>
     </>
   );
 }
