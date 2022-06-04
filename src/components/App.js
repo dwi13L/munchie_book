@@ -4,6 +4,7 @@ import "../css/app.css";
 import Header from "./Header";
 import { v4 as uuid } from "uuid";
 import RecipeEdit from "./RecipeEdit";
+import EditorSegmentMessage from "./EditorSegmentMessage";
 
 export const RecipeContext = React.createContext(undefined);
 const RECIPIES = `COOKWITHREACT_RECIPIES`;
@@ -16,7 +17,8 @@ function App() {
     const data = localStorage.getItem(RECIPIES);
     return data == null || JSON.parse(data).length == 0
       ? sampleRecipies
-      : JSON.parse(data);
+      : // ? []
+        JSON.parse(data);
   });
 
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -24,11 +26,16 @@ function App() {
   const selectedRecipe = recipies.find(
     (recipe) => recipe.id === selectedItemId
   );
-
   //Persist changes
   useEffect(() => {
     localStorage.setItem(RECIPIES, JSON.stringify(recipies));
   }, [recipies]);
+
+  /**
+   * Helper variables
+   */
+  const recipeListEmpty = recipies.length === 0 ? true : false;
+  const editorOpen = selectedItemId != null ? true : false;
 
   /**
    * Handlers
@@ -64,6 +71,9 @@ function App() {
   }
 
   function deleteRecipeHandler(id) {
+    if (selectedItemId === id) {
+      closeEditorHandler();
+    }
     setRecipies(recipies.filter((recipe) => recipe.id !== id));
   }
 
@@ -88,13 +98,27 @@ function App() {
     <>
       <Header />
       <RecipeContext.Provider value={handlers}>
-        <RecipeList recipies={recipies} />
-        {selectedItemId != null && (
-          /*selectedRecipe != undefined &&*/
+        {/* Left Side */}
+        {!recipeListEmpty && <RecipeList recipies={recipies} />}
+        {recipeListEmpty && (
+          <div className="empty-recipe-list">
+            <button className="btn btn-primary" onClick={addRecipeHandler}>
+              Add Recipe
+            </button>
+          </div>
+        )}
+
+        {/* Right Side */}
+
+        {editorOpen && (
           <RecipeEdit
             recipe={selectedRecipe}
             closeEditorHandler={closeEditorHandler}
           />
+        )}
+
+        {!editorOpen && (
+          <EditorSegmentMessage recipeListEmpty={recipeListEmpty} />
         )}
       </RecipeContext.Provider>
     </>
@@ -106,7 +130,7 @@ function App() {
  */
 const sampleRecipies = [
   {
-    id: uuid(),
+    id: "1",
     name: `Pizza`,
     servings: 2,
     cooktime: `60`,
@@ -118,19 +142,17 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
-        id: uuid(),
         name: `Wheat`,
         quantity: `1 pound`,
       },
       {
-        id: uuid(),
         name: `Veggies`,
         quantity: `As per requirement`,
       },
     ],
   },
   {
-    id: uuid(),
+    id: "2",
     name: `Fruit salad`,
     servings: 4,
     cooktime: `10`,
@@ -141,14 +163,13 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
-        id: uuid(),
         name: `Assorted fruits`,
         quantity: `As per requirement`,
       },
     ],
   },
   {
-    id: uuid(),
+    id: "3",
     name: `Coffee`,
     servings: 1,
     cooktime: `3`,
@@ -161,7 +182,6 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
-        id: uuid(),
         name: `Coffee powder`,
         quantity: `10g`,
       },

@@ -5,8 +5,16 @@ import {
 } from "RecipeIngredientEdit";
 
 function RecipeEditContainer_t2(props) {
-  const { title, buttonTitle, label1, label2, ingredients, ingredientUpdate } =
-    props;
+  const {
+    title,
+    buttonTitle,
+    label1,
+    label2,
+    ingredients,
+    addIngredientHandler,
+  } = props;
+
+  function addIngredient() {}
   return (
     <>
       <div className="card-body">
@@ -20,18 +28,20 @@ function RecipeEditContainer_t2(props) {
             <RecipeIngredientEdit_t2
               ingredient={ingredient}
               index={index}
-              ingredientUpdate={ingredientUpdate}
+              key={index}
             />
           ))}
         </div>
-        <button className="btn btn-primary add">{buttonTitle}</button>
+        <button className="btn btn-primary add" onClick={addIngredientHandler}>
+          {buttonTitle}
+        </button>
       </div>
     </>
   );
 }
 
 function RecipeEditContainer_t1(props) {
-  const { title, buttonTitle, label, instructions, instructionUpdateHandler } =
+  const { title, buttonTitle, label, instructions, addInstructionHandler } =
     props;
   return (
     <>
@@ -45,11 +55,16 @@ function RecipeEditContainer_t1(props) {
             <RecipeIngredientEdit_t1
               instruction={instruction}
               index={index}
-              instructionUpdateHandler={instructionUpdateHandler}
+              key={index}
             />
           ))}
         </div>
-        <button className="btn btn-primary add">{buttonTitle}</button>
+        <button
+          className="btn btn-primary add"
+          onClickCapture={addInstructionHandler}
+        >
+          {buttonTitle}
+        </button>
       </div>
     </>
   );

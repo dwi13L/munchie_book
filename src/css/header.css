@@ -3,4 +3,10 @@
     justify-content: center;
     align-items: center;
     border-radius: 0%;
+    height: fit-content;
+    /* border: none; */
+}
+
+.apptitle h1{
+    text-transform: uppercase;
 }

@@ -15,11 +15,67 @@
     font-family: Gotham Rounded, sans-serif;
 }
 
-/* html{ */
-    /* font-size: 20px; */
-/* } */
-
 body{
     padding: 0;
     margin: 0;
 }
+
+#root{
+    display: grid;
+    /* flex-direction: column; */
+
+}
+
+.card.header.apptitle{
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.recipe-container{
+    width: 50%;
+    min-height: 100%;
+    /* min-height: 100vh; */
+    padding: 30px;
+    overflow: auto;
+}
+
+.editor{
+    position: fixed;
+    padding: 30px;
+    padding-top: 35px;
+    right: 0;
+    top: 0;
+    /* border: 1px solid grey; */
+    width: 50%;
+    min-height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+
+}
+
+.editor-closed{
+    position: fixed;
+    right: 0;
+    width: 50%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border-left: 1px solid hsl(0, 0%, 50%); */
+}
+
+.editor-closed #message{
+    text-transform: uppercase;
+    color: hsl(0, 0%, 50%);
+}
+
+.empty-recipe-list{
+    position: fixed;
+    width: 50%;
+    min-height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

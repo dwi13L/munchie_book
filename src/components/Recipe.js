@@ -18,7 +18,7 @@ export default function Recipe(props) {
           </button>
           <button
             className="btn btn-danger"
-            onClickCapture={() => {
+            onClick={() => {
               deleteRecipeHandler(id);
             }}
           >

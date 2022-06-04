@@ -7,17 +7,25 @@ import {
 // import TextField from "@mui/material/TextField";
 // import Box from "@mui/material/Box";
 
+export const RecipeEditor = React.createContext(null);
+
 export default function RecipeEdit({ closeEditorHandler, recipe }) {
+  /**
+   * Props
+   */
   const { name, cooktime, servings, ingredients, instructions } = recipe;
+
+  /**
+   * Hooks
+   */
   const { updateRecipeHandler } = useContext(RecipeContext);
 
   function updateAgent(changes) {
     updateRecipeHandler(recipe.id, { ...recipe, ...changes });
   }
 
-  function ingredientUpdate(id, ingredient) {
+  function ingredientUpdateHandler(index, ingredient) {
     const newIngredients = [...recipe.ingredients];
-    const index = newIngredients.findIndex((i) => i.id === id);
     newIngredients[index] = ingredient;
     updateAgent({ ingredients: newIngredients });
   }
@@ -28,15 +36,53 @@ export default function RecipeEdit({ closeEditorHandler, recipe }) {
     updateAgent({ instructions: newInstructions });
   }
 
+  function deleteIngredientHandler(index) {
+    console.log();
+    updateAgent({
+      ingredients: [
+        ...recipe.ingredients.slice(0, index),
+        ...recipe.ingredients.slice(index + 1),
+      ],
+    });
+  }
+
+  function deleteInstructionHandler(index) {
+    updateAgent({
+      instructions: [
+        ...recipe.instructions.slice(0, index),
+        ...recipe.instructions.slice(index + 1),
+      ],
+    });
+  }
+
+  function addIngredientHandler() {
+    const newIngredient = { name: ``, quantity: `` };
+    ingredientUpdateHandler(recipe.ingredients.length, newIngredient);
+  }
+
+  function addInstructionHandler() {
+    instructionUpdateHandler(recipe.instructions.length, "");
+  }
+
+  const handlers = {
+    ingredientUpdateHandler,
+    deleteIngredientHandler,
+    instructionUpdateHandler,
+    deleteInstructionHandler,
+  };
+
   return (
     <div className="editor">
-      <div className="close-btn-container">
-        <button className="btn btn-light close" onClick={closeEditorHandler}>
-          &times;
-        </button>
-      </div>
-      <div className="card main-editor">
+      <div className="card main main-editor">
         <div className="card-header ">
+          <div className="close-btn-container">
+            <button
+              className="btn btn-light close"
+              onClick={closeEditorHandler}
+            >
+              &times;
+            </button>
+          </div>
           <h3 className="card-title">Edit Recipe</h3>
         </div>
         <div className="card-body">
@@ -81,22 +127,24 @@ export default function RecipeEdit({ closeEditorHandler, recipe }) {
           </section>
         </div>
         <br />
-        <RecipeEditContainer_t2
-          title={`Ingredients`}
-          buttonTitle={`Add Ingredient`}
-          label1={`Name`}
-          label2={`Quantity`}
-          ingredients={ingredients}
-          ingredientUpdate={ingredientUpdate}
-        />
-        <br />
-        <RecipeEditContainer_t1
-          title={`Instructions`}
-          buttonTitle={`Add Step`}
-          label={`Steps`}
-          instructions={instructions}
-          instructionUpdateHandler={instructionUpdateHandler}
-        />
+        <RecipeEditor.Provider value={handlers}>
+          <RecipeEditContainer_t2
+            title={`Ingredients`}
+            buttonTitle={`Add Ingredient`}
+            label1={`Name`}
+            label2={`Quantity`}
+            ingredients={ingredients}
+            addIngredientHandler={addIngredientHandler}
+          />
+          <br />
+          <RecipeEditContainer_t1
+            title={`Instructions`}
+            buttonTitle={`Add Step`}
+            label={`Steps`}
+            instructions={instructions}
+            addInstructionHandler={addInstructionHandler}
+          />
+        </RecipeEditor.Provider>
         {/* <button className="save btn">Save</button> */}
       </div>
 
