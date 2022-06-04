@@ -4,13 +4,18 @@ import Ingredient from "./Ingredient";
 
 export default function Recipe(props) {
   const { id, name, cooktime, servings, instructions, ingredients } = props;
-  const { deleteRecipeHandler } = useContext(RecipeContext);
+  const { deleteRecipeHandler, editRecipeHandler } = useContext(RecipeContext);
   return (
     <div className="card main">
       <div className="card-header flex">
         <h3>{name}</h3>
         <div className="button-container">
-          <button className="btn btn-primary ">Edit</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => editRecipeHandler(id)}
+          >
+            Edit
+          </button>
           <button
             className="btn btn-danger"
             onClickCapture={() => {

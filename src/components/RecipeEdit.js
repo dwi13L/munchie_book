@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { RecipeContext } from "./App";
 import {
   RecipeEditContainer_t1,
   RecipeEditContainer_t2,
@@ -6,11 +7,33 @@ import {
 // import TextField from "@mui/material/TextField";
 // import Box from "@mui/material/Box";
 
-export default function RecipeEdit() {
+export default function RecipeEdit({ closeEditorHandler, recipe }) {
+  const { name, cooktime, servings, ingredients, instructions } = recipe;
+  const { updateRecipeHandler } = useContext(RecipeContext);
+
+  function updateAgent(changes) {
+    updateRecipeHandler(recipe.id, { ...recipe, ...changes });
+  }
+
+  function ingredientUpdate(id, ingredient) {
+    const newIngredients = [...recipe.ingredients];
+    const index = newIngredients.findIndex((i) => i.id === id);
+    newIngredients[index] = ingredient;
+    updateAgent({ ingredients: newIngredients });
+  }
+
+  function instructionUpdateHandler(index, instruction) {
+    const newInstructions = [...recipe.instructions];
+    newInstructions[index] = instruction;
+    updateAgent({ instructions: newInstructions });
+  }
+
   return (
     <div className="editor">
       <div className="close-btn-container">
-        <button className="btn btn-light close">&times;</button>
+        <button className="btn btn-light close" onClick={closeEditorHandler}>
+          &times;
+        </button>
       </div>
       <div className="card main-editor">
         <div className="card-header ">
@@ -21,19 +44,40 @@ export default function RecipeEdit() {
             <label className="recipe-edit-label" htmlFor="name">
               Name
             </label>
-            <input type="text" id="name" name="name" />
+            <input
+              type="text"
+              id="name"
+              name="name"
+              // defaultValue={name}
+              value={name}
+              onChange={(e) => updateAgent({ name: e.target.value })}
+            />
           </section>
           <section className="input-container">
             <label className="recipe-edit-label" htmlFor="cooktime">
               Cook Time
             </label>
-            <input type="text" id="cooktime" name="cooktime" />
+            <input
+              type="text"
+              id="cooktime"
+              name="cooktime"
+              value={cooktime}
+              onChange={(e) => updateAgent({ cooktime: e.target.value })}
+            />
           </section>
           <section className="input-container">
             <label className="recipe-edit-label" htmlFor="servings">
               Servings
             </label>
-            <input type="text" id="servings" name="servings" />
+            <input
+              type="text"
+              id="servings"
+              name="servings"
+              value={servings}
+              onChange={(e) =>
+                updateAgent({ servings: parseInt(e.target.value) || 0 })
+              }
+            />
           </section>
         </div>
         <br />
@@ -42,14 +86,18 @@ export default function RecipeEdit() {
           buttonTitle={`Add Ingredient`}
           label1={`Name`}
           label2={`Quantity`}
+          ingredients={ingredients}
+          ingredientUpdate={ingredientUpdate}
         />
         <br />
         <RecipeEditContainer_t1
           title={`Instructions`}
           buttonTitle={`Add Step`}
           label={`Steps`}
+          instructions={instructions}
+          instructionUpdateHandler={instructionUpdateHandler}
         />
-        <button className="save btn">Save</button>
+        {/* <button className="save btn">Save</button> */}
       </div>
 
       {/* 

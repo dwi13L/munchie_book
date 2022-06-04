@@ -9,16 +9,36 @@ export const RecipeContext = React.createContext(undefined);
 const RECIPIES = `COOKWITHREACT_RECIPIES`;
 
 function App() {
+  /**
+   * Hooks
+   */
   const [recipies, setRecipies] = useState(() => {
     const data = localStorage.getItem(RECIPIES);
-    return data == null ? [] : JSON.parse(data);
+    return data == null || JSON.parse(data).length == 0
+      ? sampleRecipies
+      : JSON.parse(data);
   });
 
-  const handlers = { addRecipeHandler, deleteRecipeHandler };
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
+  const selectedRecipe = recipies.find(
+    (recipe) => recipe.id === selectedItemId
+  );
+
+  //Persist changes
   useEffect(() => {
     localStorage.setItem(RECIPIES, JSON.stringify(recipies));
   }, [recipies]);
+
+  /**
+   * Handlers
+   */
+  const handlers = {
+    addRecipeHandler,
+    deleteRecipeHandler,
+    editRecipeHandler,
+    updateRecipeHandler,
+  };
 
   function addRecipeHandler() {
     const newRecipe = {
@@ -39,6 +59,7 @@ function App() {
       ],
     };
 
+    setSelectedItemId(newRecipe.id);
     setRecipies([...recipies, newRecipe]);
   }
 
@@ -46,12 +67,35 @@ function App() {
     setRecipies(recipies.filter((recipe) => recipe.id !== id));
   }
 
+  function closeEditorHandler() {
+    setSelectedItemId(null);
+  }
+
+  function editRecipeHandler(id) {
+    setSelectedItemId(id);
+  }
+
+  function updateRecipeHandler(id, newRecipe) {
+    const updatedRecipeList = [...recipies];
+    const index = updatedRecipeList.findIndex((r) => r.id === id);
+    updatedRecipeList[index] = newRecipe;
+    setRecipies(updatedRecipeList);
+  }
+  /**
+   * JSX
+   */
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <RecipeContext.Provider value={handlers}>
         <RecipeList recipies={recipies} />
-        <RecipeEdit />
+        {selectedItemId != null && (
+          /*selectedRecipe != undefined &&*/
+          <RecipeEdit
+            recipe={selectedRecipe}
+            closeEditorHandler={closeEditorHandler}
+          />
+        )}
       </RecipeContext.Provider>
     </>
   );
@@ -74,10 +118,12 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
+        id: uuid(),
         name: `Wheat`,
         quantity: `1 pound`,
       },
       {
+        id: uuid(),
         name: `Veggies`,
         quantity: `As per requirement`,
       },
@@ -95,6 +141,7 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
+        id: uuid(),
         name: `Assorted fruits`,
         quantity: `As per requirement`,
       },
@@ -114,6 +161,7 @@ const sampleRecipies = [
     ],
     ingredients: [
       {
+        id: uuid(),
         name: `Coffee powder`,
         quantity: `10g`,
       },
