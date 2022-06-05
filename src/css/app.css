@@ -79,3 +79,21 @@ body{
     align-items: center;
 }
 
+@media only screen and (orientation:portrait){
+    #wrapper { display:none; }
+    #warning-message { display:block; }
+}
+
+@media only screen and (orientation:landscape){
+    #warning-message { display:none; }
+}
+
+#warning-message{
+    border: 1px solid black;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    line-height: 100vh;
+}
