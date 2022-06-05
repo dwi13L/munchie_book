@@ -5,10 +5,10 @@ export default function EditorSegmentMessage({ recipeListEmpty }) {
     <div className="editor-closed">
       {recipeListEmpty ? (
         <>
-          <p id="message">Add a recipe </p>
+          <p id="message">Add a recipe or refresh page for sample</p>
         </>
       ) : (
-        <h1 id="message">Open a recipe to edit</h1>
+        <p id="message">Open a recipe to edit or add a new one</p>
       )}
     </div>
   );

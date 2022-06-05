@@ -16,7 +16,7 @@ function App() {
   const [recipies, setRecipies] = useState(() => {
     const data = localStorage.getItem(RECIPIES);
     return data == null || JSON.parse(data).length === 0
-      ? [] //sampleRecipies
+      ? sampleRecipies //[]
       : JSON.parse(data);
   });
 
@@ -123,29 +123,32 @@ function App() {
 /**
  * Data
  */
-/*const sampleRecipies = [
+const sampleRecipies = [
   {
     id: "1",
-    name: `Pizza - (SAMPLE RECIPE)`,
-    servings: 2,
-    cooktime: `60`,
+    name: `Coffee - (SAMPLE RECIPE )`,
+    servings: 1,
+    cooktime: `10`,
     instructions: [
-      `Make dough`,
-      `Make base with dough`,
-      `Add chopped veggies`,
-      `Bake and serve hot`,
+      `Add 5 ml of water to coffee powder in a mug and stir well`,
+      `Add milk`,
+      `Add sugar if needed`,
+      `Leave mug in oven for 2 minutes under medium heat`,
+      `Take out and sip your hot yum coffee!`,
     ],
     ingredients: [
       {
-        name: `Wheat`,
-        quantity: `1 pound`,
+        name: `Coffee powder`,
+        quantity: `5 grams`,
       },
       {
-        name: `Veggies`,
-        quantity: `As per requirement`,
+        name: `Milk`,
+        quantity: `250 ml`,
       },
     ],
   },
+];
+/*
   {
     id: "2",
     name: `Fruit salad (SAMPLE RECIPE)`,

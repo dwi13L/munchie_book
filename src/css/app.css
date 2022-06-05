@@ -67,6 +67,7 @@ body{
 
 .editor-closed #message{
     text-transform: uppercase;
+    text-align: center;
     color: hsl(0, 0%, 50%);
 }
 
