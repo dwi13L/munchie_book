@@ -16,9 +16,8 @@ function App() {
   const [recipies, setRecipies] = useState(() => {
     const data = localStorage.getItem(RECIPIES);
     return data == null || JSON.parse(data).length === 0
-      ? sampleRecipies
-      : // ? []
-        JSON.parse(data);
+      ? [] //sampleRecipies
+      : JSON.parse(data);
   });
 
   const [selectedItemId, setSelectedItemId] = useState(null);
