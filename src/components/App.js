@@ -16,9 +16,8 @@ function App() {
   const [recipies, setRecipies] = useState(() => {
     const data = localStorage.getItem(RECIPIES);
     return data == null || JSON.parse(data).length === 0
-      ? sampleRecipies
-      : // ? []
-        JSON.parse(data);
+      ? [] //sampleRecipies
+      : JSON.parse(data);
   });
 
   const [selectedItemId, setSelectedItemId] = useState(null);
@@ -124,7 +123,7 @@ function App() {
 /**
  * Data
  */
-const sampleRecipies = [
+/*const sampleRecipies = [
   {
     id: "1",
     name: `Pizza - (SAMPLE RECIPE)`,
@@ -185,3 +184,4 @@ const sampleRecipies = [
   },
 ];
 export default App;
+*/
