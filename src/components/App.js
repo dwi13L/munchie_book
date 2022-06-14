@@ -5,6 +5,7 @@ import Header from "./Header";
 import { v4 as uuid } from "uuid";
 import RecipeEditor from "./RecipeEditor";
 import EditorSegmentMessage from "./EditorSegmentMessage";
+import GithubLink from "./githubLink/GithubLink.js";
 
 export const RecipeCrudContext = React.createContext(undefined);
 const RECIPIES = `COOKWITHREACT_RECIPIES`;
@@ -116,6 +117,7 @@ function App() {
           <EditorSegmentMessage recipeListEmpty={recipeListEmpty} />
         )}
       </RecipeCrudContext.Provider>
+      <GithubLink source="https://github.com/dwi13L/munchie_book" />
     </>
   );
 }
