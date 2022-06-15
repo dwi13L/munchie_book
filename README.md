@@ -1,6 +1,6 @@
 # Munchie Book
 
-### A simple application that stores your recipies. visit [Munchie Book](https://munchiebook.danielwilliam.dev) to jot down your recipies.
+### A simple application that stores your recipes. visit [Munchie Book](https://munchiebook.danielwilliam.dev) to jot down your recipies.
   + The app was bootstraped with create-react-app and styles with bootstrap.
   + Local storage is used as the storage layer. It can be connected to a backend with a backend  .   
 
